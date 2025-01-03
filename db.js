@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
-
-require('dotenv').config();
+const {config} = require('dotenv');
+config();
 // Set up PostgreSQL connection
 const pool = new Pool({
     connectionString: process.env.DB_URL,

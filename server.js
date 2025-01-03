@@ -1,23 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const multer = require('multer');
+const multer = require('multer');4
+const connectPgSimple = require('connect-pg-simple');
+
 const fs = require('fs');
-const pool = require('./db');
 const app = express();
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const passport = require('passport');
 const env = require('dotenv');
 
-const PgSession = connectPGSimple(session);
+const PgSession = connectPgSimple(session);
+const pool = require('./db');
 
 // Session configuration
 app.use(
     session({
         store: new PgSession({
-            pool: db, // Connection pool
+            pool: pool, 
             tableName: 'session', // Table name to store session data
-          }),
+        }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
