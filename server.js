@@ -7,6 +7,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const passport = require('passport');
+const env = require('dotenv');
+
 
 // Session configuration
 app.use(
