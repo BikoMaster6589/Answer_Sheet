@@ -1,0 +1,127 @@
+.mainClass{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.div1{
+display: flex;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+
+#line1{
+    width: 284%;
+    height: 0.4vh;
+    background-color: black;
+    margin-top: 0rem;
+}
+
+#line2{
+    left: 54.5%;
+    height: 0.4vh;
+    background-color: black;
+    margin-top: 0rem;
+    position: absolute;
+    width: 42.6%;
+    top: 8.2%;
+}
+
+.role{
+font-family: baskervilla;
+font-weight: 400;
+font-size: 1.2rem;
+}
+
+.role span{
+    color: var(--primaryColor);
+}
+
+.logo img{
+    width: 30%;
+    position: relative;
+    top: 0.6rem;
+}
+
+
+.logout a{
+    color: black;
+    font-family: roboto;
+    border: 2px solid blue;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.div2{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 2rem;
+}
+.div2 .heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 2.5rem;
+}
+
+.div2 .heading h1{
+    font-family:  baskervilla;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+.div2 .heading hr{
+    height: 0.5vh;
+    background-color: black;
+    width: 17%;
+    position: relative;
+    left: 42%;
+}
+
+
+.div3{
+margin: 2rem 0;
+padding: 1.5rem 0;
+}
+
+.div3 form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: baseline;
+        gap: 2rem;
+}
+
+.div3 form .Questions{
+    font-size: 1.5rem;
+    font-family: roboto;
+    display: flex;
+    gap: 1.2rem;
+}
+
+.div3 form .Questions input{
+    padding: 0.1rem 0.5rem;
+    font-size: 1rem;
+    font-family: roboto;
+}
+
+
+.div3 form button{
+    color: white;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-family: 'roboto';
+    background-color: var(--secondaryColor);
+    border: none;
+    border-radius: 0.5rem;
+}
+

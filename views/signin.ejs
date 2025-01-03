@@ -1,0 +1,53 @@
+
+<%-include('partials/header.ejs') %>
+<title>Signin_Section</title>
+<link rel="stylesheet" href="/css/signin.css" />
+
+<div class="MainPage">
+<div class="content">
+<div class="heading">
+    <div class="kl">
+    <h1>Sign In</h1>
+    <hr id="line">
+</div>
+<div class="image2">
+    <img src="/Images/Logo.png" alt="">
+</div>
+
+</div>
+<div class="form">
+    <form action="/signin" method="POST">
+        <div class="field">
+        <label>Email:</label>
+        <input type="email" name="email" required />
+    </div>
+    <div class="field">
+        <label>Password:</label>
+        <input type="password" name="password" required />
+    </div>
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+<hr>
+<div class="signUp">
+    <p>Not a Member ? <a href="/signup">Sign Up</a></p>
+</div>
+<div class="content2">
+    <p>Student can Only Evaluate papers Whereas Teacher can make papers</p>
+</div>
+
+</div>
+<div class="image">
+    <img src="/Images/signin.png" alt="">
+</div>
+
+
+</div>
+
+
+
+
+
+   
+    
+<%-include('partials/footer.ejs') %>

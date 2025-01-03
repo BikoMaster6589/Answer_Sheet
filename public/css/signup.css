@@ -1,0 +1,117 @@
+.MainPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.content{
+    background-color: #F5F5F5;
+    flex-basis: 50%;
+    height: 100%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1rem 1.5rem;
+    /* border: 0.0px solid black; */
+    justify-content: space-around;
+    box-shadow: 2px -2px 14px 1px #c3c1c1;
+}
+
+
+
+.content .heading h1{
+    color: black;
+    font-family: baskervilla;
+    font-size: 3.5rem;
+    font-weight: 400;
+} 
+
+
+
+.content .form form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 1.5rem;
+    font-family: roboto;
+    align-items: baseline;
+}
+
+
+.content .form form .field{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+}
+
+
+.content .form form .field input{
+    height: 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    border: 1px solid black;
+    color: black;
+}
+
+.content .form form .field select{
+    height: 2rem;
+    font-size: 1.2rem;
+    border-radius: .4rem;
+    /* padding: 1rem; */
+    border: 1px solid black;
+}
+
+.content .form form button{
+    border: none;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: blue;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+hr{
+    color: black;
+    height: 0.3vh;
+    background-color: black;
+    border: none;
+}
+
+#line{
+    width: 25%;
+    height: 0.8vh;
+    background-color: blue;
+    border: none;
+    position: relative;
+    left: 5%;
+    border-radius: 7px;
+}
+
+.image{
+/* background-color: yellow; */
+flex-basis: 50%;
+height: 100%;
+}
+
+.image img{
+    width: 86%;
+    position: relative;
+    right: 2%;
+}
+
+
+.signIn p{
+    font-size: 1.5rem;
+    font-family: roboto;
+    text-align: center;
+}
+
+

@@ -1,0 +1,90 @@
+<%- include('partials/header.ejs') %>
+<title>Home</title>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/result.css">
+
+<div class="mainClass">
+    <div class="div1">
+        <div class="role">
+            <h3>Logged In As 
+                <% if(role=="student"){ %>
+                    <span>Student</span>
+               <% }%>
+               <% if(role == "teacher"){ %>
+                    <span>Teacher</span>
+               <%  }%>
+           
+            
+            </h3>
+
+
+            <hr id="line1">
+        </div>
+        <div class="logo">
+           <img src="/Images/Logo2.jpg" alt="No Image">
+        </div>
+        <div class="logout">
+            <a href="/home" type="button">Home</a>
+            <hr id="line2">
+        </div>
+    </div>
+    <div class="div2">
+        <div class="heading">
+            <h1>Results</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="div3">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th onclick="sortTable(1)">
+                Roll No
+                <span class="sort-icon">&#9662;</span> <!-- Downward triangle icon -->
+              </th>
+              <th onclick="sortTable(1)">Paper Id</th>
+              <th onclick="sortTable(2)">Marks Scored</th>
+              <th onclick="sortTable(3)">Total Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% results.forEach(result => { %>
+              <tr>
+                <td><%= result.student_name %></td>
+                <td><%= result.student_roll_no %></td>
+                <td><%= result.paper_id %></td>
+                <td><%= result.marks %></td>
+                <td><%= result.total_marks %></td> 
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      
+      <script>
+        // Function to sort the table
+        function sortTable(columnIndex) {
+          const table = document.getElementById("resultsTable");
+          const rows = Array.from(table.querySelectorAll("tbody tr"));
+      
+          // Sort rows based on the content of the specified column
+          rows.sort((a, b) => {
+            const aText = a.cells[columnIndex].innerText.trim();
+            const bText = b.cells[columnIndex].innerText.trim();
+      
+            // Compare as numbers
+            return parseInt(aText) - parseInt(bText);
+          });
+      
+          // Remove current rows and append sorted rows
+          const tbody = table.querySelector("tbody");
+          tbody.innerHTML = "";
+          rows.forEach(row => tbody.appendChild(row));
+        }
+      </script>
+
+<%- include('partials/footer.ejs') %>
+
+
+ 

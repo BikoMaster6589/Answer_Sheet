@@ -1,0 +1,98 @@
+<%- include('partials/header.ejs') %>
+<title>Home</title>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/selectPaper.css">
+
+
+
+<div class="mainClass">
+
+    <div class="div1">
+        <div class="role">
+            <h3>Logged In As 
+                
+            
+                <% if(role=="student"){ %>
+                    <span>Student</span>
+               <% }%>
+               <% if(role == "teacher"){ %>
+                    <span>Teacher</span>
+               <%  }%>
+           
+            
+            </h3>
+
+
+            <hr id="line1">
+        </div>
+        <div class="logo">
+           <img src="/Images/Logo2.jpg" alt="No Image">
+        </div>
+        <div class="logout">
+            <a href="/home">Home</a>
+            <hr id="line2">
+        </div>
+    </div>
+
+    <div class="div2">
+        <div class="heading">
+            <h1>Select A Paper To Evaluate</h1>
+            <hr>
+        </div>
+        <div class="nameDiv">
+            <h2>Name : <span><%= name %></span></h2>
+            <h2>Roll No : <span><%= roll_no %></span> </h2>
+        </div>
+    </div>
+
+    <hr id="lineo">
+
+    <div class="div3">
+
+        <form method="get">
+            <ul>
+                <% papers.forEach(paper => { %>
+                    <a href="/evaluate/<%= roll_no %>/<%= paper.id %>">
+                        <h3>
+                            <%= paper.name %>
+                        </h3>
+                        <h2><%= paper.id %></h2>
+                    </a>
+                <% }) %>
+            </ul>
+        </form>
+
+    </div>
+
+
+    <div class="div4">
+        <img src="/Images/copyright.png" alt="">
+    </div>
+    
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <%- include('partials/footer.ejs') %>
+

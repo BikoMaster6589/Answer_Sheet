@@ -1,0 +1,63 @@
+
+    <%- include('partials/header.ejs') %>
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/home.css">
+
+        <div class="mainClass">
+        <div class="div1">
+            <div class="role">
+                <h3>Logged In As 
+                    
+                
+                    <% if(role=="student"){ %>
+                        <span>Student</span>
+                   <% }%>
+                   <% if(role == "teacher"){ %>
+                        <span>Teacher</span>
+                   <%  }%>
+               
+                
+                </h3>
+
+
+                <hr id="line1">
+            </div>
+            <div class="logo">
+               <img src="/Images/Logo2.jpg" alt="No Image">
+            </div>
+            <div class="logout">
+                <a href="/logout" type="button">Logout</a>
+                <hr id="line2">
+            </div>
+        </div>
+
+
+
+        <div class="div2">
+            <h1>Welcome to Answer <span>Sheet</span> Evaluation Tool</h1>
+            <p>It is your comprehensive solution for efficiently managing students, organizing academic papers, and streamlining the evaluation process. Whether you're <span class="bold">tracking</span> student details, <span class="bold">uploading and managing</span> question papers, or <span class="bold">automating</span> the grading of answer scripts, this tool is designed to <span id="high">save time, reduce manual effort, and ensure accuracy.</span> Simplify academic administration and focus on what matters most: quality education!</p>
+            <nav class="allButtons">
+                <% if(role=='teacher' && klo=="525" ){ %>   
+                    <h1>I am admin</h1>
+                <% } %>
+    
+                <% if(role=="student"&& klo!='525'){ %>
+                    <a href="/evaluate">Evaluate Answer</a>
+                <% } %>
+                <% if(role=='teacher' && klo!='525'){ %>
+                  <a href="/add-paper">Add Paper</a>
+                  <a href="/results">View Result of Students</a> 
+                  <% } %>
+            </nav>
+        </div>
+        <div class="div3">
+           <img src="/Images/copyright.png" alt="">
+        </div>
+        
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+
+ 

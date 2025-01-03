@@ -1,0 +1,5 @@
+What is Your name|kl
+What is Your age|18
+What is Your gender|M
+What is Your Grade|C
+What is Your hobby|Reading

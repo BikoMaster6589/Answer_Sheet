@@ -1,0 +1,4 @@
+What is Your name|Anmol
+What is Your age|20
+What is Your gender|F
+What is Your Grade|A

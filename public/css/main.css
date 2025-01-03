@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+/* Font-Families  */
+
+
+@font-face {
+    font-family: roboto;
+   src: url(../fonts/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: baskervilla;
+    src: url(../fonts/BaskervvilleSC-Regular.ttf);
+}
+
+
+
+/* Roots_Colors  */
+
+:root{
+ --primaryColor : #0029B1;
+ --secondaryColor : #3862EC;
+ --alert : red;
+ --secondaryTextColor : #716d6d;
+
+}
+
+
+
+li{
+    list-style: none;
+    position: relative;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+
+
+/* Header Code  */

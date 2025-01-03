@@ -1,0 +1,165 @@
+.mainClass{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.div1{
+display: flex;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+
+#line1{
+    width: 284%;
+    height: 0.4vh;
+    background-color: black;
+    margin-top: 0rem;
+}
+
+#line2{
+    left: 54.5%;
+    height: 0.4vh;
+    background-color: black;
+    margin-top: 0rem;
+    position: absolute;
+    width: 42.6%;
+    top: 8.2%;
+}
+
+.role{
+font-family: baskervilla;
+font-weight: 400;
+font-size: 1.2rem;
+}
+
+.role span{
+    color: var(--primaryColor);
+}
+
+.logo img{
+    width: 30%;
+    position: relative;
+    top: 0.6rem;
+}
+
+
+.logout a{
+    color: black;
+    font-family: roboto;
+    border: 2px solid blue;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+}
+
+
+
+.div2{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 2rem;
+}
+.div2 .heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.div2 .heading h1{
+    font-family:  baskervilla;
+    font-weight: 400;
+}
+
+.div2 .heading hr{
+    height: 0.5vh;
+    background-color: black;
+    width: 20%;
+    position: relative;
+    left: 41%;
+}
+
+
+.div2 .nameDiv{
+    display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        justify-content: center;
+        align-items: flex-start;
+}
+
+.div2 .nameDiv h2{
+    font-family: 'roboto';
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.div2 .nameDiv h2 span{
+    color: var(--primaryColor);
+}
+
+
+.div3 {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: roboto;
+    text-align: left;
+  }
+
+  /* Table header styling */
+  thead th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  .sort-icon {
+    font-size: 12px;
+    margin-left: 5px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Table row styling */
+  tbody tr {
+    background-color: #ffffff;
+  }
+
+  tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* Table cell styling */
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  /* Highlight specific columns */
+  td:nth-child(2),
+  td:nth-child(4),
+  th:nth-child(2),
+  th:nth-child(4) {
+    background-color: #007bff;
+    color: white;
+  }

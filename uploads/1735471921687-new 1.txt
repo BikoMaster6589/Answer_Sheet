@@ -1,0 +1,5 @@
+What is 2+2?|4
+Solve: 3x = 9. What is x?|3
+What is the square root of 16?|4
+What is 10% of 200?|20
+Convert 5 kilometers to meters.|5000

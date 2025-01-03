@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<main>
+    <h2>Add Student</h2>
+    <form action="/add-student" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" name="rollNumber" required>
+        
+        <button type="submit">Add Student</button>
+    </form>
+    <p><a href="/">Back to Home</a></p>
+</main>
+<%- include('partials/footer') %>

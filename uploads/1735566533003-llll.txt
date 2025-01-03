@@ -1,0 +1,4 @@
+What is Your name|Biko
+What is Your age|21
+What is Your gender|M
+What is Your Grade|B

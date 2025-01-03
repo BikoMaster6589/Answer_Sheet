@@ -1,0 +1,69 @@
+
+<%- include('partials/header.ejs') %>
+<title>Evaluate</title>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/evaluate.css">
+
+
+
+<div class="mainClass">
+    <div class="div1">
+        <div class="role">
+            <h3>Logged In As 
+                
+            
+                <% if(role=="student"){ %>
+                    <span>Student</span>
+               <% }%>
+               <% if(role == "teacher"){ %>
+                    <span>Teacher</span>
+               <%  }%>
+           
+            
+            </h3>
+
+
+            <hr id="line1">
+        </div>
+        <div class="logo">
+           <img src="/Images/Logo2.jpg" alt="No Image">
+        </div>
+        <div class="logout">
+            <a href="/home">Home</a>
+            <hr id="line2">
+        </div>
+    </div>
+
+    
+    <div class="div2">
+        <div class="heading">
+            <h1>Questions.</h1>
+            <hr>
+        </div>
+       
+    </div>
+
+
+
+    <div class="div3">
+        <form action="/evaluate/<%= paperId %>" method="POST">
+            <input type="hidden" name="roll_no" value="<%= roll_no %>">
+            <input type="hidden" name="paper_id" value="<%= paperId %>">
+        
+            <% questions.forEach((question, index) => { %>
+                <div class="Questions">
+                    <label for="marks_<%= index %>"><%= question.question %></label>
+                    <input type="text" id="marks_<%= index %>" name="marks_<%= index %>" required>
+                </div>
+            <% }); %>
+        
+            <button type="submit">Submit Evaluation</button>
+        </form>
+    </div>
+</div>
+
+
+
+    <%- include('partials/footer.ejs') %>
+
+
