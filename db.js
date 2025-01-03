@@ -3,7 +3,7 @@ const {config} = require('dotenv');
 config();
 // Set up PostgreSQL connection
 const pool = new Pool({
-    connectionString: process.env.DB_URL,
+  connectionString: process.env.DB_URL,
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DATABASE,
