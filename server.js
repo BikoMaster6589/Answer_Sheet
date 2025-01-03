@@ -9,11 +9,16 @@ const session = require('express-session');
 const passport = require('passport');
 const env = require('dotenv');
 
+const PgSession = connectPGSimple(session);
 
 // Session configuration
 app.use(
     session({
-        secret: 'your-secret-key',
+        store: new PgSession({
+            pool: db, // Connection pool
+            tableName: 'session', // Table name to store session data
+          }),
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
         cookie: { secure: false }, 
