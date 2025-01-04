@@ -175,6 +175,48 @@ app.get('/evaluate/:studentId/:paperId', async (req, res) => {
     }
 });
 
+app.get('/result/:rollNumber', async (req, res) => {
+    const { rollNumber } = req.params;
+
+    try {
+        const result = await pool.query(
+            `SELECT papers.name AS paper_name, results.marks
+            FROM results
+            JOIN papers ON results.paper_id = papers.id
+            WHERE results.roll_number = $1`, 
+            [rollNumber]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).send('No results found for this roll number.');
+        }
+
+        res.render('results', { rollNumber, results: result.rows });
+    } catch (err) {
+        console.error('Error fetching results:', err);
+        res.status(500).send('Failed to fetch results.');
+    }
+});
+
+app.get('/results', async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT users.name AS student_name, users.roll_number AS student_roll_no,
+                   papers.id AS paper_id, results.marks, papers.total_marks
+            FROM results
+            JOIN users ON results.roll_number = users.roll_number
+            JOIN papers ON results.paper_id = papers.id`
+        );
+
+        res.render('results', { results: result.rows , role : req.session.role });
+    } catch (err) {
+        console.error('Error fetching results:', err);
+        res.status(500).send('Failed to fetch results.');
+    }
+});
+
+
+
 // Route to calculate the score of the students
 app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
     const { roll_no } = req.body;
