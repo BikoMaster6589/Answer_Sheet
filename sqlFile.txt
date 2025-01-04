@@ -1,0 +1,46 @@
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    roll_number VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL, -- 'teacher' or 'student'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE papers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    total_marks INT NOT NULL,
+    marks_per_question INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE questions (
+    id SERIAL PRIMARY KEY,
+    paper_id INT NOT NULL,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    FOREIGN KEY (paper_id) REFERENCES papers(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE results (
+    id SERIAL PRIMARY KEY,
+    roll_number VARCHAR(50) NOT NULL,
+    paper_id INT NOT NULL,
+    marks INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (roll_number) REFERENCES users(roll_number) ON DELETE CASCADE,
+    FOREIGN KEY (paper_id) REFERENCES papers(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE session (
+    sid VARCHAR(255) PRIMARY KEY, -- Session ID
+    sess JSON NOT NULL,           -- Session data in JSON format
+    expire TIMESTAMP NOT NULL     -- Expiration timestamp
+);
