@@ -9,14 +9,17 @@ if (!process.env.DB_URL) {
     process.exit(1);
 }
 
+// SSL setting to enable or disable based on environment variable
+const sslEnabled = process.env.PG_SSL === 'true'; // Check the PG_SSL environment variable
+
 // Set up PostgreSQL connection
 const pool = new Pool({
-  connectionString: process.env.DB_URL, // Use the full DB_URL connection string
-  ssl: {
+  connectionString: process.env.DB_URL,  // Use the full DB_URL connection string
+  ssl: sslEnabled ? {
     rejectUnauthorized: false, // Set to true if you want to reject self-signed certificates
-    // Uncomment and provide path if you want to use a certificate file for security
+    // Uncomment and provide the path if you want to use a certificate file for security
     // ca: fs.readFileSync('/path/to/ca-certificate.crt').toString(),
-  }
+  } : false, // SSL disabled if PG_SSL is not 'true'
 });
 
 // Test connection using a query

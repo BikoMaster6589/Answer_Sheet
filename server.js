@@ -26,7 +26,7 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false }, 
+        cookie: { secure: process.env.PG_SSL === 'true' }, // Secure cookie if SSL is enabled
     })
 );
 app.use(passport.initialize());
@@ -156,25 +156,6 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-app.get('/evaluate/:studentId/:paperId', async (req, res) => {
-    const { studentId, paperId } = req.params;
-    try {
-        const result = await pool.query(
-            'SELECT id, question FROM questions WHERE paper_id = $1',
-            [paperId]
-        );
-
-        if (result.rows.length === 0) {
-            return res.status(404).send('No questions found for this paper.');
-        }
-
-        res.render('evaluate', { questions: result.rows, paperId, roll_no: req.session.roll_no, role: req.session.role });
-    } catch (err) {
-        console.error('Error fetching questions:', err);
-        res.status(500).send('Failed to fetch questions.');
-    }
-});
-
 // Route to calculate the score of the students
 app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
     const { roll_no } = req.body;
@@ -235,6 +216,7 @@ app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
     }
 });
 
+// Route to upload papers and questions
 app.post('/add-paper', upload.single('questionFile'), verifyRole('teacher'), async (req, res) => {
     const { name, totalMarks, marks_per_question } = req.body;
     const questionFile = req.file;
