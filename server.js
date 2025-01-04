@@ -20,13 +20,13 @@ env.config();
 app.use(
     session({
         store: new PgSession({
-            pool: pool, 
-            tableName: 'session', // Table name to store session data
+            pool: pool,
+            tableName: 'session',
         }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: process.env.PG_SSL === 'true' }, // Secure cookie if SSL is enabled
+        cookie: { secure: false, maxAge: 60000 }, // Ensure cookie is being set correctly
     })
 );
 app.use(passport.initialize());
