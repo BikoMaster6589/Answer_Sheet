@@ -26,7 +26,7 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false, maxAge: 60000 }, // Ensure cookie is being set correctly
+        cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // Ensure cookie is being set correctly
     })
 );
 app.use(passport.initialize());
