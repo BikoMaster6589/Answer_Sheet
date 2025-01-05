@@ -95,6 +95,11 @@ app.get('/set-roll-number', async (req, res) => {
     }
 });
 
+app.get('/success',(req,res,next)=>{
+    res.render("success.ejs");
+})
+
+
 app.get('/logout', (req, res, next) => {
     req.logout((err) => {
         if (err) {
@@ -270,7 +275,7 @@ app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
             );
         }
 
-        res.redirect('/home');
+        res.redirect('/success');
     } catch (err) {
         console.error('Error evaluating results:', err);
         res.status(500).send('Failed to submit evaluation.');

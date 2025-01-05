@@ -1,0 +1,57 @@
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.mainPage h1{
+    font-family: baskervilla;
+    font-size: 4rem;
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
+    font-weight: 400;
+}
+.mainPage h1 span{
+    color: var(--primaryColor);
+}
+
+.mainPage img{
+    height: 100%;
+    width: 29%;
+}
+
+.mainPage p{
+    width: 73%;
+    color: #555;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 1.2px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.buttons a{
+    color: black;
+    font-family: roboto;
+    border: 2px solid blue;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.buttons a:first-child{
+    background-color: var(--primaryColor);
+    color: white;
+}
