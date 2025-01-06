@@ -38,6 +38,12 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+// app.use((req, res, next) => {
+//     res.locals.error = req.session.error || null;
+//     req.session.error = null; // Clear error after passing to locals
+//     next();
+// });
+
 // Middleware to verify the user role
 const verifyRole = (requiredRole, errorMessage) => {
     return (req, res, next) => {
@@ -129,10 +135,14 @@ app.get('/evaluate', verifyRole('student', 'Only for Students'), async (req, res
     }
 });
 
+// Route to render the signin page
 app.get('/signin', (req, res) => {
-    res.render('signin');
+    const error = req.session.error; // Retrieve error from session
+    req.session.error = null; // Clear the error after retrieving it
+    res.render('signin', { error }); // Pass the error to the view
 });
 
+// Route to handle sign-in logic
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
 
@@ -141,13 +151,15 @@ app.post('/signin', async (req, res) => {
         const user = result.rows[0];
 
         if (!user) {
-            return res.status(401).send('Invalid email or password.');
+            req.session.error = 'User Not Found. Please Sign Up';
+            return res.redirect('/signin');
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(401).send('Invalid email or password.');
+            req.session.error = 'Invalid email or password.';
+            return res.redirect('/signin');
         }
 
         req.session.role = user.role;
@@ -157,7 +169,8 @@ app.post('/signin', async (req, res) => {
         res.redirect('/home');
     } catch (err) {
         console.error('Error during signin:', err);
-        res.status(500).send('Failed to sign in.');
+        req.session.error = 'An error occurred. Please try again.';
+        res.redirect('/signin');
     }
 });
 

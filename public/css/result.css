@@ -135,8 +135,6 @@ font-size: 1.2rem;
     margin-left: 5px;
     color: white;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   /* Table row styling */
