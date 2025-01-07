@@ -48,11 +48,36 @@ font-size: 1.2rem;
 
 
 .logout a{
+    position: relative;
     color: black;
     font-family: roboto;
     border: 2px solid blue;
     padding: 0.3rem 1rem;
     border-radius: 0.5rem;
+    z-index: 1;
+}
+.logout a:hover{
+    color: white;
+    transition: color 0.3s ease-in;
+}
+
+.logout a::before{
+  content: '';
+  width: 0%;
+  height: 100%;
+  border-radius: 0.4rem;
+  background-color: var(--primaryColor);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.5s ease-out;
+}
+
+.logout a:hover::before{
+    width: 100%;
+    transition: all 0.3s ease-in;
 }
 
 .div2{
@@ -101,15 +126,38 @@ font-size: 1.2rem;
     align-items: center;
 }
 
-.allButtons a{
+.allButtons a {
     border: 2px solid var(--primaryColor);
     padding: 1rem 1.5rem;
     color: white;
+    position: relative;
     background-color: var(--primaryColor);
     font-family: 'roboto';
     border-radius: 1.5rem;
     font-size: 1.2rem;
+    z-index: 2;
+    overflow: hidden; /* Ensure the pseudo-element stays within the bounds */
 }
+
+.allButtons a::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: var(--secondaryColor);
+    left: 0;
+    z-index: -1;
+    border-radius: 1.5rem;
+    transition: width 0.5s ease-out; /* Smooth transition when shrinking */
+}
+
+.allButtons a:hover::before {
+    width: 100%;
+    /* background-color: var(--secondaryColor); */
+    transition: width 0.4s ease-in; /* Smooth transition when expanding */
+}
+
 
 .div3{
     width: 50%;

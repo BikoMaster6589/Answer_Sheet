@@ -48,12 +48,38 @@ font-size: 1.2rem;
 }
 
 
+
 .logout a{
+    position: relative;
     color: black;
     font-family: roboto;
     border: 2px solid blue;
     padding: 0.3rem 1rem;
     border-radius: 0.5rem;
+    z-index: 1;
+}
+.logout a:hover{
+    color: white;
+    transition: color 0.3s ease-in;
+}
+
+.logout a::before{
+  content: '';
+  width: 0%;
+  height: 100%;
+  border-radius: 0.4rem;
+  background-color: var(--primaryColor);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.5s ease-out;
+}
+
+.logout a:hover::before{
+    width: 100%;
+    transition: all 0.3s ease-in;
 }
 
 
@@ -104,6 +130,7 @@ padding: 1rem 0;
 }
 
 .div3 form button{
+    position: relative;
     border: 2px solid var(--primaryColor);
     padding: 0.5rem 1rem;
     color: white;
@@ -112,5 +139,23 @@ padding: 1rem 0;
     border-radius: 0.5rem;
     font-size: 1.2rem;
     margin-top: 1.5rem;
+    z-index: 1;
+}
 
+.div3 form button::before{
+    content: "";
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: var(--secondaryColor);
+    left: 0;
+    z-index: -1;
+    border-radius: 0.4rem;
+    transition: width 0.5s ease-out;
+}
+
+.div3 form button:hover::before{
+    width: 100%;
+    transition: width 0.4s ease-in;
 }

@@ -48,11 +48,36 @@ font-size: 1.2rem;
 
 
 .logout a{
+    position: relative;
     color: black;
     font-family: roboto;
     border: 2px solid blue;
     padding: 0.3rem 1rem;
     border-radius: 0.5rem;
+    z-index: 1;
+}
+.logout a:hover{
+    color: white;
+    transition: color 0.3s ease-in;
+}
+
+.logout a::before{
+  content: '';
+  width: 0%;
+  height: 100%;
+  border-radius: 0.4rem;
+  background-color: var(--primaryColor);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.5s ease-out;
+}
+
+.logout a:hover::before{
+    width: 100%;
+    transition: all 0.3s ease-in;
 }
 
 .div2{
@@ -122,6 +147,7 @@ font-size: 1.2rem;
 }
 
 .div3 form ul a{
+    position: relative;
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -129,11 +155,27 @@ font-size: 1.2rem;
     gap: 2rem;
     background-color: var(--primaryColor);
     border-radius: 1.1rem;
+    z-index: 1;
+    transition: all 0.5s ease;
+    overflow: hidden;
 }
 
-.div3 form ul a:hover{
+.div3 form ul a::before{
+    content: "";
     background-color: var(--secondaryColor);
-   
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 1.1rem;
+    transition: all 0.5s ease-out;
+}
+
+.div3 form ul a:hover::before{
+    width: 100%;
+    transition: all 0.4s ease-in;
 }
 
 
