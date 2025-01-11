@@ -13,10 +13,11 @@ const pool = require('./db');
 
 const app = express();
 
-// Load environment variables from .env file
-env.config();
 
-// Session configuration
+env.config(); // Load environment variables from .env file
+
+// --------------------------------------Middlewares--------------------------------------------------------------
+
 app.use(
     session({
         store: new PgSession({
@@ -26,25 +27,17 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // Ensure cookie is being set correctly
+        cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, 
     })
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// app.use((req, res, next) => {
-//     res.locals.error = req.session.error || null;
-//     req.session.error = null; // Clear error after passing to locals
-//     next();
-// });
 
-// Middleware to verify the user role
 const verifyRole = (requiredRole, errorMessage) => {
     return (req, res, next) => {
         if (!req.session.role) {
@@ -72,14 +65,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 app.use('/uploads', express.static('uploads'));
 
-// Routes
+
+
+//----------------------------------------------------------- Get Routes----------------------------------------------
 app.get('/', (req, res) => {
-    res.redirect('/signup'); // Redirects to the signup page initially
+    res.redirect('/signup'); 
 });
 
 app.get('/home', (req, res) => {
     if (!req.session.role) {
-        return res.redirect('/signin'); // Redirect if not authenticated
+        return res.redirect('/signin'); 
     }
     res.render('index', { role: req.session.role, klo: req.session.roll_no });
 });
@@ -109,9 +104,9 @@ app.get('/success',(req,res,next)=>{
 app.get('/logout', (req, res, next) => {
     req.logout((err) => {
         if (err) {
-            return next(err); // Pass the error to the next middleware for handling
+            return next(err); 
         }
-        res.redirect('/signin'); // Redirect to the home page or login page
+        res.redirect('/signin');
     });
 });
 
@@ -135,44 +130,12 @@ app.get('/evaluate', verifyRole('student', 'Only for Students'), async (req, res
     }
 });
 
-// Route to render the signin page
 app.get('/signin', (req, res) => {
-    const error = req.session.error; // Retrieve error from session
-    req.session.error = null; // Clear the error after retrieving it
-    res.render('signin', { error }); // Pass the error to the view
+    const error = req.session.error; 
+    req.session.error = null; 
+    res.render('signin', { error }); 
 });
 
-// Route to handle sign-in logic
-app.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        const user = result.rows[0];
-
-        if (!user) {
-            req.session.error = 'User Not Found. Please Sign Up';
-            return res.redirect('/signin');
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        if (!isMatch) {
-            req.session.error = 'Invalid email or password.';
-            return res.redirect('/signin');
-        }
-
-        req.session.role = user.role;
-        req.session.roll_no = user.roll_number;
-        req.session.name = user.name;
-
-        res.redirect('/home');
-    } catch (err) {
-        console.error('Error during signin:', err);
-        req.session.error = 'An error occurred. Please try again.';
-        res.redirect('/signin');
-    }
-});
 
 app.get('/evaluate/:studentId/:paperId', async (req, res) => {
     const { studentId, paperId } = req.params;
@@ -220,7 +183,7 @@ app.get('/results', async (req, res) => {
     try {
         const result = await pool.query(
             `SELECT users.name AS student_name, users.roll_number AS student_roll_no,
-                   papers.id AS paper_id, results.marks, papers.total_marks
+                   papers.name AS paper_name, results.marks, papers.total_marks
             FROM results
             JOIN users ON results.roll_number = users.roll_number
             JOIN papers ON results.paper_id = papers.id`
@@ -233,9 +196,45 @@ app.get('/results', async (req, res) => {
     }
 });
 
+app.get('/signup', (req, res) => {
+    res.render('signup');
+});
 
 
-// Route to calculate the score of the students
+//-------------------------------------------- Post Routes ----------------------------------------------------------------
+
+app.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        const user = result.rows[0];
+
+        if (!user) {
+            req.session.error = 'User Not Found. Please Sign Up';
+            return res.redirect('/signin');
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            req.session.error = 'Invalid email or password.';
+            return res.redirect('/signin');
+        }
+
+        req.session.role = user.role;
+        req.session.roll_no = user.roll_number;
+        req.session.name = user.name;
+
+        res.redirect('/home');
+    } catch (err) {
+        console.error('Error during signin:', err);
+        req.session.error = 'An error occurred. Please try again.';
+        res.redirect('/signin');
+    }
+});
+
+
 app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
     const { roll_no } = req.body;
     const paper_id = req.params.paperId;
@@ -297,7 +296,7 @@ app.post('/evaluate/:paperId', verifyRole('student'), async (req, res) => {
 
 
 
-// Route to upload papers and questions
+
 app.post('/add-paper', upload.single('questionFile'), verifyRole('teacher'), async (req, res) => {
     const { name, totalMarks, marks_per_question } = req.body;
     const questionFile = req.file;
@@ -330,9 +329,7 @@ app.post('/add-paper', upload.single('questionFile'), verifyRole('teacher'), asy
     }
 });
 
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
+
 
 app.post('/signup', async (req, res) => {
     const { name, roll_no, email, password, role } = req.body;
@@ -352,6 +349,8 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+
+// ------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
