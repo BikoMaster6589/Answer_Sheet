@@ -79,22 +79,6 @@ app.get('/home', (req, res) => {
     res.render('index', { role: req.session.role, klo: req.session.roll_no });
 });
 
-app.get('/set-roll-number', async (req, res) => {
-    if (!req.session.role || req.session.role !== 'student') {
-        return res.status(403).send('Only students can set their roll number.');
-    }
-
-    try {
-        if (!req.session.rollNumber) {
-            return res.status(404).send('Roll number not found in session.');
-        }
-
-        res.send(`Roll number dynamically set to ${req.session.rollNumber}`);
-    } catch (err) {
-        console.error('Error setting roll number:', err);
-        res.status(500).send('Failed to set roll number.');
-    }
-});
 
 app.get('/success',(req,res,next)=>{
     res.render("success.ejs");
@@ -202,6 +186,27 @@ app.get('/signup', (req, res) => {
 
 
 //-------------------------------------------- Post Routes ----------------------------------------------------------------
+
+
+app.post('/signup', async (req, res) => {
+    const { name, roll_no, email, password, role } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await pool.query(
+            'INSERT INTO users (name, roll_number, email, password, role) VALUES ($1, $2, $3, $4, $5)',
+            [name, roll_no, email, hashedPassword, role]
+        );
+
+        res.redirect('/signin');
+    } catch (err) {
+        console.error('Error during signup:', err);
+        res.status(500).send('Failed to sign up. Ensure roll number and email are unique.');
+    }
+});
+
+
 
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
@@ -331,23 +336,6 @@ app.post('/add-paper', upload.single('questionFile'), verifyRole('teacher'), asy
 
 
 
-app.post('/signup', async (req, res) => {
-    const { name, roll_no, email, password, role } = req.body;
-
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        await pool.query(
-            'INSERT INTO users (name, roll_number, email, password, role) VALUES ($1, $2, $3, $4, $5)',
-            [name, roll_no, email, hashedPassword, role]
-        );
-
-        res.redirect('/signin');
-    } catch (err) {
-        console.error('Error during signup:', err);
-        res.status(500).send('Failed to sign up. Ensure roll number and email are unique.');
-    }
-});
 
 
 // ------------------------------------------------------------------------------------------------------------------
