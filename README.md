@@ -91,8 +91,7 @@ Click the link above to access the **Online Exam Portal** and start using its fe
 ### 🔽 Clone the Repository  
 Run the following command to clone the repository:  
 ```sh
-git clone https://github.com/your-username/Online-Exam-Portal.git
-cd Online-Exam-Portal
+git clone [https://github.com/your-username/Online-Exam-Portal.git](https://github.com/BikoMaster6589/Answer_Sheet.git)
 ```
 
 
