@@ -1,4 +1,0 @@
-What is 2+2|4
-What is 5*2|10
-What is 8*2|16
-What is Your name|Bikram

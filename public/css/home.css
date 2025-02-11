@@ -136,7 +136,7 @@ font-size: 1.2rem;
     border-radius: 1.5rem;
     font-size: 1.2rem;
     z-index: 2;
-    overflow: hidden; /* Ensure the pseudo-element stays within the bounds */
+    overflow: hidden; 
 }
 
 .allButtons a::before {

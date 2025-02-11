@@ -1,4 +1,0 @@
-What is Your name|Bikram
-What is Your age|20
-What is Your gender|M
-What is Your Grade|A

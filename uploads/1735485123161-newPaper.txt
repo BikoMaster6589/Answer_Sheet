@@ -1,3 +1,0 @@
-What is a|4
-What is b|5
-What is c|6
