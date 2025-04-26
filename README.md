@@ -64,7 +64,7 @@ The platform enables students to take exams, teachers to upload and evaluate pap
 
 🚀 The server is **live and running** at:  
 
-🔗 **[[https://your-live-server-url.com](https://answer-sheet.onrender.com)]**  
+🔗 **[[https://answer-sheet.onrender.com/](https://answer-sheet.onrender.com)]**  
 
 Click the link above to access the **Online Exam Portal** and start using its features! 🎯  
 
